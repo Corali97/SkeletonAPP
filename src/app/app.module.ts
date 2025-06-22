@@ -13,6 +13,8 @@ import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
 
 import { MisDatosComponent } from './mis-datos/mis-datos.component';
 
+import { IonicStorageModule } from '@ionic/storage-angular';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],

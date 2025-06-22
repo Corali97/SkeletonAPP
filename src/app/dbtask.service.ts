@@ -3,7 +3,7 @@ import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
 
 @Injectable({ providedIn: 'root' })
 export class DBTaskService {
-  private dbInstance: SQLiteObject;
+  private dbInstance!: SQLiteObject;
 
   constructor(private sqlite: SQLite) {}
 

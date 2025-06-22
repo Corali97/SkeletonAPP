@@ -6,6 +6,8 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { FormsModule } from '@angular/forms';
+import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
 
 @NgModule({
   declarations: [AppComponent],

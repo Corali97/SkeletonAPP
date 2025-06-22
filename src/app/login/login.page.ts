@@ -6,7 +6,7 @@ import { Storage } from '@ionic/storage-angular';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss']
+  styleUrls: ['./login.page.scss'],
   standalone: false,
 })
 export class LoginPage {

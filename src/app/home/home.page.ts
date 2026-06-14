@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -26,6 +26,7 @@ import {
 import { AlertController, AnimationController } from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import {
+  barbellOutline,
   eyeOutline,
   logOutOutline,
   refreshOutline,
@@ -42,6 +43,7 @@ import { AppDataService } from '../services/app-data.service';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    RouterLink,
     MatDatepickerModule,
     MatFormFieldModule,
     MatInputModule,
@@ -89,7 +91,7 @@ export class HomePage implements AfterViewInit {
     private readonly route: ActivatedRoute,
     private readonly router: Router
   ) {
-    addIcons({ eyeOutline, logOutOutline, refreshOutline, schoolOutline });
+    addIcons({ barbellOutline, eyeOutline, logOutOutline, refreshOutline, schoolOutline });
 
     this.usuario = this.router.getCurrentNavigation()?.extras.state?.['usuario']
       ?? history.state?.usuario
@@ -149,7 +151,10 @@ export class HomePage implements AfterViewInit {
 
     const alert = await this.alertController.create({
       header: 'Datos ingresados',
-      message: `Nombre: ${datos.nombre} ${datos.apellido}`,
+      message: `Nombre: ${datos.nombre}
+Apellido: ${datos.apellido}
+Nivel de educacion: ${datos.nivelEducacion}
+Fecha de nacimiento: ${this.formatDate(datos.fechaNacimiento)}`,
       buttons: ['Aceptar']
     });
     await alert.present();
@@ -181,5 +186,14 @@ export class HomePage implements AfterViewInit {
         { offset: 1, transform: 'translateX(0)' }
       ])
       .play();
+  }
+
+  private formatDate(value: Date | string | null | undefined): string {
+    if (!value) {
+      return '';
+    }
+
+    const date = value instanceof Date ? value : new Date(value);
+    return new Intl.DateTimeFormat('es-CL').format(date);
   }
 }

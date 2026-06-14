@@ -101,6 +101,43 @@ mat-form-field {
   min-height: 46px;
 }
 
+.exercise-link {
+  margin: 14px 0 0;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+.exercise-link ion-card-content {
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.exercise-link ion-icon {
+  width: 42px;
+  height: 42px;
+  padding: 9px;
+  border-radius: 8px;
+  background: #e8f0ff;
+  color: #2563eb;
+}
+
+.exercise-link strong,
+.exercise-link span {
+  display: block;
+}
+
+.exercise-link strong {
+  color: #111827;
+}
+
+.exercise-link span {
+  margin-top: 2px;
+  color: #6b7280;
+  font-size: 0.86rem;
+}
+
 @media (max-width: 360px) {
   .actions {
     grid-template-columns: 1fr;

@@ -1,0 +1,55 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/home" aria-label="Volver">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      <span class="toolbar-kicker">AgendaFit</span>
+      <strong>Ejercicios</strong>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <main class="content-space">
+    <form class="add-form" (ngSubmit)="addExercise()">
+      <ion-item>
+        <ion-input label="Nuevo ejercicio" label-placement="stacked" placeholder="Ej: Elevacion lateral" [(ngModel)]="newExerciseName" name="newExerciseName"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-select label="Categoria" label-placement="stacked" [(ngModel)]="newExerciseCategory" name="newExerciseCategory">
+          <ion-select-option *ngFor="let category of categories" [value]="category">
+            {{ categoryLabels[category] }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-button type="submit" aria-label="Agregar ejercicio">
+        <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+      </ion-button>
+    </form>
+
+    <ion-card class="category-block" *ngFor="let category of categories">
+      <h3>
+        {{ categoryLabels[category] }}
+        <ion-chip>{{ exercisesByCategory(category).length }}</ion-chip>
+      </h3>
+
+      <ion-item *ngFor="let exercise of exercisesByCategory(category)" [class.is-complete]="isCompleted(exercise.id)">
+        <span slot="start" class="exercise-icon" [ngClass]="exercise.category">
+          <ion-icon [name]="categoryIcon(exercise.category)"></ion-icon>
+        </span>
+        <ion-label>
+          <strong>{{ exercise.name }}</strong>
+          <span>{{ exercise.minutes }} min</span>
+        </ion-label>
+        <ion-button slot="end" class="complete-button" [fill]="isCompleted(exercise.id) ? 'solid' : 'outline'" (click)="toggleCompleted(exercise.id)">
+          <ion-icon slot="icon-only" name="checkmark-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-card>
+  </main>
+</ion-content>

@@ -1,0 +1,54 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/home" aria-label="Volver">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      <span class="toolbar-kicker">AgendaFit</span>
+      <strong>Progreso</strong>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <main class="content-space">
+    <ion-card class="daily-card">
+      <ion-card-content>
+        <div>
+          <p class="eyebrow">Hoy</p>
+          <h2>{{ progressPercent }}% completado</h2>
+          <p>{{ completedToday }} ejercicios marcados</p>
+        </div>
+
+        <div class="progress-ring" aria-hidden="true">
+          <svg viewBox="0 0 120 120">
+            <circle class="ring-bg" cx="60" cy="60" r="48"></circle>
+            <circle class="ring-value" cx="60" cy="60" r="48" [style.stroke-dashoffset]="ringOffset"></circle>
+          </svg>
+          <strong>{{ progressPercent }}%</strong>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="weekly-card">
+      <ion-card-content>
+        <div>
+          <p class="eyebrow">Semana actual</p>
+          <h2>{{ completedDays }} dias con actividad</h2>
+        </div>
+        <ion-button fill="clear" color="danger" (click)="resetWeek()">Reiniciar</ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <div class="week-bars">
+      <div class="day-bar" *ngFor="let day of weekProgress">
+        <div class="bar-track">
+          <div class="bar-fill" [style.height.%]="day.height"></div>
+        </div>
+        <span>{{ day.label }}</span>
+      </div>
+    </div>
+  </main>
+</ion-content>

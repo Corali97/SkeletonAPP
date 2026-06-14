@@ -1,0 +1,135 @@
+ion-toolbar {
+  --background: rgba(248, 250, 252, 0.98);
+  --border-color: transparent;
+}
+
+.toolbar-kicker {
+  display: block;
+  color: #2563eb;
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+ion-title strong {
+  display: block;
+  color: #111827;
+  font-size: 1.12rem;
+}
+
+.content-space {
+  padding: 16px;
+}
+
+.add-form {
+  margin-bottom: 12px;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 1fr 118px 48px;
+  gap: 8px;
+  align-items: end;
+  border: 1px solid #dbe3ef;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.add-form ion-item {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+}
+
+.add-form ion-button {
+  height: 48px;
+  margin: 0;
+}
+
+.category-block {
+  margin: 0 0 12px;
+  padding: 12px;
+  border: 1px solid #dbe3ef;
+  border-radius: 8px;
+  box-shadow: none;
+  background: #ffffff;
+}
+
+.category-block h3 {
+  margin: 0 0 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #111827;
+}
+
+.category-block ion-item {
+  --background: #f8fafc;
+  --border-radius: 8px;
+  --padding-start: 10px;
+  --inner-padding-end: 8px;
+  margin-top: 8px;
+  border: 1px solid #dbe3ef;
+  border-radius: 8px;
+}
+
+.category-block ion-item.is-complete {
+  --background: #eef8f3;
+}
+
+.exercise-icon {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 21px;
+}
+
+ion-label strong,
+ion-label span {
+  display: block;
+}
+
+ion-label strong {
+  color: #111827;
+  font-size: 0.96rem;
+}
+
+ion-label span {
+  color: #6b7280;
+  font-size: 0.84rem;
+}
+
+.complete-button {
+  --border-radius: 999px;
+  --padding-start: 0;
+  --padding-end: 0;
+  width: 38px;
+  height: 38px;
+}
+
+.gluteos {
+  background: #f47b62;
+}
+
+.abdomen {
+  background: #116d62;
+}
+
+.piernas {
+  background: #5d8bdc;
+}
+
+.brazos {
+  background: #8f6ccf;
+}
+
+@media (max-width: 380px) {
+  .add-form {
+    grid-template-columns: 1fr 48px;
+  }
+
+  .add-form ion-item:nth-child(2) {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+}

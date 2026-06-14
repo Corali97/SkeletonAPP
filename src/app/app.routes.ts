@@ -15,19 +15,19 @@ export const routes: Routes = [
     loadComponent: () => import('./home/home.page').then((m) => m.HomePage)
   },
   {
-    path: 'rutina',
-    loadComponent: () => import('./routine/routine.page').then((m) => m.RoutinePage)
+    path: 'problematica',
+    loadComponent: () => import('./info-page/info-page.component').then((m) => m.ProblematicaPage)
   },
   {
-    path: 'ejercicios',
-    loadComponent: () => import('./exercises/exercises.page').then((m) => m.ExercisesPage)
+    path: 'solucion',
+    loadComponent: () => import('./info-page/info-page.component').then((m) => m.SolucionPage)
   },
   {
-    path: 'progreso',
-    loadComponent: () => import('./progress/progress.page').then((m) => m.ProgressPage)
+    path: 'componentes',
+    loadComponent: () => import('./info-page/info-page.component').then((m) => m.ComponentesPage)
   },
   {
-    path: 'perfil',
-    loadComponent: () => import('./profile/profile.page').then((m) => m.ProfilePage)
+    path: 'funciones',
+    loadComponent: () => import('./info-page/info-page.component').then((m) => m.FuncionesPage)
   }
 ];

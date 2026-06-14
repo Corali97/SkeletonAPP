@@ -1,8 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 import { HomePage } from './home.page';
-import { WorkoutService } from '../services/workout.service';
+import { AppDataService } from '../services/app-data.service';
 
 describe('HomePage', () => {
   let component: HomePage;
@@ -13,11 +14,11 @@ describe('HomePage', () => {
 
     await TestBed.configureTestingModule({
       imports: [HomePage],
-      providers: [provideRouter([])]
+      providers: [provideRouter([]), provideAnimations()]
     }).compileComponents();
 
-    const workoutService = TestBed.inject(WorkoutService);
-    workoutService.login({ name: 'Test', goal: 3 });
+    const appDataService = TestBed.inject(AppDataService);
+    appDataService.setUser('Test');
 
     fixture = TestBed.createComponent(HomePage);
     component = fixture.componentInstance;

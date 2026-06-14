@@ -1,7 +1,7 @@
 {
-  "name": "agendafit",
+  "name": "skeletonapp",
   "version": "0.0.1",
-  "author": "AgendaFit",
+  "author": "PGY4221",
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
@@ -13,10 +13,12 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "~16.2.12",
+    "@angular/cdk": "^16.2.14",
     "@angular/common": "~16.2.12",
     "@angular/compiler": "~16.2.12",
     "@angular/core": "~16.2.12",
     "@angular/forms": "~16.2.12",
+    "@angular/material": "^16.2.14",
     "@angular/platform-browser": "~16.2.12",
     "@angular/platform-browser-dynamic": "~16.2.12",
     "@angular/router": "~16.2.12",
@@ -31,12 +33,12 @@
     "tslib": "^2.3.0",
     "zone.js": "~0.13.3"
   },
-   "devDependencies": {
+  "devDependencies": {
     "@angular-devkit/build-angular": "~16.2.16",
     "@angular/cli": "~16.2.16",
     "@angular/compiler-cli": "~16.2.12",
     "@capacitor/cli": "5.7.8",
     "typescript": "~5.1.6"
   },
-  "description": "Aplicacion Ionic para organizar rutinas simples de ejercicio en casa."
+  "description": "Aplicacion Ionic Angular SkeletonAPP para la Experiencia 1 de PGY4221."
 }

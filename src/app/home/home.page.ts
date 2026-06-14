@@ -1,6 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatNativeDateModule } from '@angular/material/core';
 import {
   IonButton,
   IonButtons,
@@ -9,30 +14,26 @@ import {
   IonContent,
   IonHeader,
   IonIcon,
+  IonInput,
+  IonItem,
   IonLabel,
-  IonNote,
+  IonList,
+  IonSelect,
+  IonSelectOption,
   IonTitle,
   IonToolbar
 } from '@ionic/angular/standalone';
-import { AnimationController } from '@ionic/angular';
+import { AlertController, AnimationController } from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import {
-  barbellOutline,
-  calendarOutline,
-  fitnessOutline,
+  eyeOutline,
+  informationCircleOutline,
   logOutOutline,
-  personOutline,
-  statsChartOutline
+  refreshOutline,
+  schoolOutline
 } from 'ionicons/icons';
 
-import { WorkoutService } from '../services/workout.service';
-
-interface HomeShortcut {
-  title: string;
-  note: string;
-  icon: string;
-  route: string;
-}
+import { AppDataService } from '../services/app-data.service';
 
 @Component({
   selector: 'app-home',
@@ -41,7 +42,12 @@ interface HomeShortcut {
   standalone: true,
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     RouterLink,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatNativeDateModule,
     IonButton,
     IonButtons,
     IonCard,
@@ -49,62 +55,139 @@ interface HomeShortcut {
     IonContent,
     IonHeader,
     IonIcon,
+    IonInput,
+    IonItem,
     IonLabel,
-    IonNote,
+    IonList,
+    IonSelect,
+    IonSelectOption,
     IonTitle,
     IonToolbar
   ]
 })
 export class HomePage implements AfterViewInit {
-  @ViewChild('heroCard', { read: ElementRef }) private heroCard?: ElementRef<HTMLElement>;
+  @ViewChild('homeTitle', { read: ElementRef }) private homeTitle?: ElementRef<HTMLElement>;
+  @ViewChild('nombreField', { read: ElementRef }) private nombreField?: ElementRef<HTMLElement>;
+  @ViewChild('apellidoField', { read: ElementRef }) private apellidoField?: ElementRef<HTMLElement>;
 
-  readonly shortcuts: HomeShortcut[] = [
-    { title: 'Rutina diaria', note: 'Marca tus ejercicios de hoy', icon: 'calendar-outline', route: '/rutina' },
-    { title: 'Ejercicios', note: 'Agrega y clasifica rutinas', icon: 'barbell-outline', route: '/ejercicios' },
-    { title: 'Progreso', note: 'Revisa tu avance semanal', icon: 'stats-chart-outline', route: '/progreso' },
-    { title: 'Perfil', note: 'Completa tus datos personales', icon: 'person-outline', route: '/perfil' }
+  usuario = 'Usuario';
+  readonly nivelesEducacion = ['Basica', 'Media', 'Tecnica', 'Universitaria', 'Postgrado'];
+  readonly infoPages = [
+    { label: 'Problematica', route: '/problematica' },
+    { label: 'Solucion', route: '/solucion' },
+    { label: 'Componentes', route: '/componentes' },
+    { label: 'Funciones', route: '/funciones' }
   ];
 
+  readonly form = this.formBuilder.group({
+    nombre: [this.appDataService.getHomeData().nombre, [Validators.required, Validators.minLength(2)]],
+    apellido: [this.appDataService.getHomeData().apellido, [Validators.required, Validators.minLength(2)]],
+    nivelEducacion: [this.appDataService.getHomeData().nivelEducacion, [Validators.required]],
+    fechaNacimiento: [
+      this.appDataService.getHomeData().fechaNacimiento ? new Date(this.appDataService.getHomeData().fechaNacimiento) : null,
+      [Validators.required]
+    ]
+  });
+
   constructor(
+    private readonly alertController: AlertController,
     private readonly animationController: AnimationController,
-    private readonly router: Router,
-    private readonly workoutService: WorkoutService
+    private readonly appDataService: AppDataService,
+    private readonly formBuilder: FormBuilder,
+    private readonly route: ActivatedRoute,
+    private readonly router: Router
   ) {
-    addIcons({
-      barbellOutline,
-      calendarOutline,
-      fitnessOutline,
-      logOutOutline,
-      personOutline,
-      statsChartOutline
+    addIcons({ eyeOutline, informationCircleOutline, logOutOutline, refreshOutline, schoolOutline });
+
+    this.usuario = this.router.getCurrentNavigation()?.extras.state?.['usuario']
+      ?? history.state?.usuario
+      ?? this.appDataService.user
+      ?? this.usuario;
+
+    this.route.queryParamMap.subscribe((params) => {
+      this.usuario = params.get('usuario') ?? this.usuario;
     });
   }
 
   ngAfterViewInit(): void {
-    if (!this.heroCard?.nativeElement) {
+    if (!this.homeTitle?.nativeElement) {
       return;
     }
 
     this.animationController
       .create()
-      .addElement(this.heroCard.nativeElement)
-      .duration(900)
+      .addElement(this.homeTitle.nativeElement)
+      .duration(1000)
       .iterations(1)
-      .fromTo('transform', 'translateY(20px)', 'translateY(0)')
-      .fromTo('opacity', '0.2', '1')
+      .fromTo('transform', 'translateX(-18px)', 'translateX(0)')
+      .fromTo('opacity', '0.35', '1')
       .play();
   }
 
-  get userName(): string {
-    return this.workoutService.user?.name ?? 'Usuario';
+  limpiar(): void {
+    this.form.reset({
+      nombre: '',
+      apellido: '',
+      nivelEducacion: '',
+      fechaNacimiento: null
+    });
+    this.animarCampos();
   }
 
-  get weeklyGoal(): number {
-    return this.workoutService.user?.goal ?? 3;
+  async mostrar(): Promise<void> {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      const alert = await this.alertController.create({
+        header: 'Formulario incompleto',
+        message: 'Completa nombre, apellido, nivel de educacion y fecha de nacimiento.',
+        buttons: ['Aceptar']
+      });
+      await alert.present();
+      return;
+    }
+
+    const datos = this.form.getRawValue();
+    const fecha = datos.fechaNacimiento instanceof Date ? datos.fechaNacimiento.toISOString() : '';
+    this.appDataService.saveHomeData({
+      nombre: datos.nombre ?? '',
+      apellido: datos.apellido ?? '',
+      nivelEducacion: datos.nivelEducacion ?? '',
+      fechaNacimiento: fecha
+    });
+
+    const alert = await this.alertController.create({
+      header: 'Datos ingresados',
+      message: `Nombre: ${datos.nombre} ${datos.apellido}`,
+      buttons: ['Aceptar']
+    });
+    await alert.present();
   }
 
   logout(): void {
-    this.workoutService.logout();
+    this.appDataService.clearUser();
     void this.router.navigateByUrl('/login', { replaceUrl: true });
+  }
+
+  private animarCampos(): void {
+    const elements = [this.nombreField?.nativeElement, this.apellidoField?.nativeElement].filter(
+      (element): element is HTMLElement => Boolean(element)
+    );
+
+    if (!elements.length) {
+      return;
+    }
+
+    this.animationController
+      .create()
+      .addElement(elements)
+      .duration(1000)
+      .iterations(1)
+      .keyframes([
+        { offset: 0, transform: 'translateX(0)' },
+        { offset: 0.35, transform: 'translateX(18px)' },
+        { offset: 0.7, transform: 'translateX(-8px)' },
+        { offset: 1, transform: 'translateX(0)' }
+      ])
+      .play();
   }
 }

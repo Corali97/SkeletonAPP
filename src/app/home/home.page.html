@@ -1,8 +1,8 @@
 <ion-header translucent>
   <ion-toolbar>
     <ion-title>
-      <span class="toolbar-kicker">AgendaFit</span>
-      <strong>Hola, {{ userName }}</strong>
+      <span class="toolbar-kicker">Home</span>
+      <strong #homeTitle>Hola, {{ usuario }}</strong>
     </ion-title>
     <ion-buttons slot="end">
       <ion-button aria-label="Cerrar sesion" (click)="logout()">
@@ -14,27 +14,61 @@
 
 <ion-content fullscreen>
   <main class="content-space">
-    <ion-card #heroCard class="hero-card">
+    <ion-card class="welcome-card">
       <ion-card-content>
-        <ion-icon name="fitness-outline" aria-hidden="true"></ion-icon>
+        <ion-icon name="school-outline" aria-hidden="true"></ion-icon>
         <div>
-          <ion-note>Proyecto Ionic Angular</ion-note>
-          <h2>Entrenamiento simple en casa</h2>
-          <p>Organiza rutinas cortas, registra avances y mantén una meta semanal de {{ weeklyGoal }} sesiones.</p>
+          <p class="eyebrow">Usuario recibido desde Login</p>
+          <h2>{{ usuario }}</h2>
         </div>
       </ion-card-content>
     </ion-card>
 
-    <section class="shortcut-grid">
-      <ion-card class="shortcut-card" *ngFor="let item of shortcuts" [routerLink]="item.route" button>
-        <ion-card-content>
-          <ion-icon [name]="item.icon" aria-hidden="true"></ion-icon>
-          <ion-label>
-            <strong>{{ item.title }}</strong>
-            <span>{{ item.note }}</span>
-          </ion-label>
-        </ion-card-content>
-      </ion-card>
+    <form [formGroup]="form" class="data-form">
+      <ion-list lines="none">
+        <ion-item #nombreField>
+          <ion-input label="Nombre" label-placement="stacked" placeholder="Ingresa tu nombre" formControlName="nombre"></ion-input>
+        </ion-item>
+
+        <ion-item #apellidoField>
+          <ion-input label="Apellido" label-placement="stacked" placeholder="Ingresa tu apellido" formControlName="apellido"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-select label="Nivel de educacion" label-placement="stacked" formControlName="nivelEducacion">
+            <ion-select-option *ngFor="let nivel of nivelesEducacion" [value]="nivel">
+              {{ nivel }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <div class="date-field">
+          <mat-form-field appearance="outline">
+            <mat-label>Fecha nacimiento</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento" readonly>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </ion-list>
+
+      <div class="actions">
+        <ion-button fill="outline" type="button" (click)="limpiar()">
+          <ion-icon slot="start" name="refresh-outline"></ion-icon>
+          Limpiar
+        </ion-button>
+        <ion-button type="button" (click)="mostrar()">
+          <ion-icon slot="start" name="eye-outline"></ion-icon>
+          Mostrar
+        </ion-button>
+      </div>
+    </form>
+
+    <section class="info-links">
+      <ion-button *ngFor="let item of infoPages" fill="clear" [routerLink]="item.route">
+        <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+        {{ item.label }}
+      </ion-button>
     </section>
   </main>
 </ion-content>

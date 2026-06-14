@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 import { LoginPage } from './login.page';
 
@@ -12,7 +13,7 @@ describe('LoginPage', () => {
 
     await TestBed.configureTestingModule({
       imports: [LoginPage],
-      providers: [provideRouter([])]
+      providers: [provideRouter([]), provideAnimations()]
     }).compileComponents();
 
     fixture = TestBed.createComponent(LoginPage);

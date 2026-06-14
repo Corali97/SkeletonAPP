@@ -1,105 +1,121 @@
 ion-toolbar {
-  --background: rgba(247, 251, 248, 0.96);
+  --background: rgba(248, 250, 252, 0.98);
   --border-color: transparent;
 }
 
-.toolbar-kicker {
+.toolbar-kicker,
+.eyebrow {
   display: block;
-  color: #116d62;
-  font-size: 0.78rem;
+  margin: 0;
+  color: #2563eb;
+  font-size: 0.76rem;
   font-weight: 800;
   text-transform: uppercase;
 }
 
-.content-space {
-  padding: 14px 16px 22px;
+ion-title strong {
+  display: block;
+  color: #111827;
+  font-size: 1.12rem;
 }
 
-ion-card {
-  margin: 0;
-  border: 1px solid #dce5e0;
+.content-space {
+  padding: 16px;
+}
+
+ion-card,
+.data-form {
+  border: 1px solid #dbe3ef;
   border-radius: 8px;
   box-shadow: none;
 }
 
-.hero-card {
-  margin-bottom: 16px;
-  background: linear-gradient(145deg, #ffffff 0%, #eef8f3 100%);
+.welcome-card {
+  margin: 0 0 14px;
+  background: #ffffff;
 }
 
-.hero-card ion-card-content {
-  min-height: 168px;
+.welcome-card ion-card-content {
   padding: 18px;
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
 }
 
-.hero-card ion-icon {
-  width: 58px;
-  height: 58px;
-  padding: 12px;
-  flex: 0 0 auto;
+.welcome-card ion-icon {
+  width: 48px;
+  height: 48px;
+  padding: 10px;
   border-radius: 8px;
-  background: #17211f;
-  color: #79d4a3;
+  background: #e8f0ff;
+  color: #2563eb;
 }
 
-.hero-card ion-note {
-  color: #116d62;
-  font-weight: 800;
-}
-
-.hero-card h2 {
-  margin: 8px 0;
-  color: #17211f;
+.welcome-card h2 {
+  margin: 4px 0 0;
+  color: #111827;
   font-size: 1.35rem;
 }
 
-.hero-card p {
-  margin: 0;
-  color: #68706d;
-  line-height: 1.45;
+.data-form {
+  padding: 12px;
+  background: #ffffff;
 }
 
-.shortcut-grid {
+ion-list {
   display: grid;
+  gap: 10px;
+  background: transparent;
+}
+
+ion-item {
+  --background: #f8fafc;
+  --border-radius: 8px;
+  --padding-start: 12px;
+  --inner-padding-end: 12px;
+  border: 1px solid #dbe3ef;
+  border-radius: 8px;
+}
+
+.date-field {
+  padding-top: 2px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+::ng-deep .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}
+
+.actions {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 10px;
 }
 
-.shortcut-card {
-  background: #ffffff;
-  cursor: pointer;
+.actions ion-button {
+  margin: 0;
+  min-height: 46px;
 }
 
-.shortcut-card ion-card-content {
-  padding: 15px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
+.info-links {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
 }
 
-.shortcut-card ion-icon {
-  width: 42px;
-  height: 42px;
-  padding: 9px;
-  border-radius: 8px;
-  background: #e9efec;
-  color: #116d62;
+.info-links ion-button {
+  min-height: 42px;
+  margin: 0;
 }
 
-ion-label strong,
-ion-label span {
-  display: block;
-}
-
-ion-label strong {
-  color: #17211f;
-  font-size: 1rem;
-}
-
-ion-label span {
-  margin-top: 3px;
-  color: #68706d;
-  font-size: 0.86rem;
+@media (max-width: 360px) {
+  .actions,
+  .info-links {
+    grid-template-columns: 1fr;
+  }
 }

@@ -1,38 +1,52 @@
 <ion-content fullscreen class="login-content">
   <section class="login-wrap">
     <div #brandMark class="brand-mark" aria-hidden="true">
-      <ion-icon name="barbell-outline"></ion-icon>
+      <ion-icon name="person-circle-outline"></ion-icon>
     </div>
 
-    <p class="eyebrow">Entrena en casa</p>
-    <h1>AgendaFit</h1>
-    <p class="intro">Rutinas cortas, simples y listas para completar mientras avanzas cada semana.</p>
+    <p class="eyebrow">SkeletonAPP</p>
+    <h1>Login</h1>
+    <p class="intro">Ingresa tus datos para continuar al Home.</p>
 
     <ion-card>
       <ion-card-content>
-        <form [formGroup]="form" (ngSubmit)="login()">
+        <form [formGroup]="form" (ngSubmit)="ingresar()">
           <ion-list lines="none">
             <ion-item>
               <ion-input
-                label="Nombre"
+                label="Usuario"
                 label-placement="stacked"
-                placeholder="Tu nombre"
-                autocomplete="name"
-                formControlName="name"
+                placeholder="3 a 8 caracteres"
+                autocomplete="username"
+                maxlength="8"
+                formControlName="usuario"
               ></ion-input>
             </ion-item>
+            <ion-text color="danger" *ngIf="form.controls.usuario.touched && form.controls.usuario.invalid">
+              <small>El usuario debe ser alfanumerico y tener entre 3 y 8 caracteres.</small>
+            </ion-text>
 
             <ion-item>
-              <ion-select label="Objetivo semanal" label-placement="stacked" formControlName="goal">
-                <ion-select-option [value]="3">3 entrenamientos</ion-select-option>
-                <ion-select-option [value]="4">4 entrenamientos</ion-select-option>
-                <ion-select-option [value]="5">5 entrenamientos</ion-select-option>
-              </ion-select>
+              <ion-input
+                label="Password"
+                label-placement="stacked"
+                placeholder="****"
+                autocomplete="current-password"
+                inputmode="numeric"
+                maxlength="4"
+                type="password"
+                formControlName="password"
+              >
+                <ion-icon slot="start" name="lock-closed-outline"></ion-icon>
+              </ion-input>
             </ion-item>
+            <ion-text color="danger" *ngIf="form.controls.password.touched && form.controls.password.invalid">
+              <small>La password debe tener exactamente 4 numeros.</small>
+            </ion-text>
           </ion-list>
 
           <ion-button expand="block" type="submit">
-            Entrar
+            Ingresar
             <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
           </ion-button>
         </form>

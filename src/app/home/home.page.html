@@ -57,18 +57,12 @@
           <ion-icon slot="start" name="refresh-outline"></ion-icon>
           Limpiar
         </ion-button>
-        <ion-button type="button" (click)="mostrar()">
+        <ion-button type="button" (click)="guardar()">
           <ion-icon slot="start" name="eye-outline"></ion-icon>
-          Mostrar
+          Guardar
         </ion-button>
       </div>
     </form>
 
-    <section class="info-links">
-      <ion-button *ngFor="let item of infoPages" fill="clear" [routerLink]="item.route">
-        <ion-icon slot="start" name="information-circle-outline"></ion-icon>
-        {{ item.label }}
-      </ion-button>
-    </section>
   </main>
 </ion-content>

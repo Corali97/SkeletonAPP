@@ -101,21 +101,8 @@ mat-form-field {
   min-height: 46px;
 }
 
-.info-links {
-  margin-top: 14px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
-}
-
-.info-links ion-button {
-  min-height: 42px;
-  margin: 0;
-}
-
 @media (max-width: 360px) {
-  .actions,
-  .info-links {
+  .actions {
     grid-template-columns: 1fr;
   }
 }

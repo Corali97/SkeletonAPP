@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -27,7 +27,6 @@ import { AlertController, AnimationController } from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import {
   eyeOutline,
-  informationCircleOutline,
   logOutOutline,
   refreshOutline,
   schoolOutline
@@ -43,7 +42,6 @@ import { AppDataService } from '../services/app-data.service';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RouterLink,
     MatDatepickerModule,
     MatFormFieldModule,
     MatInputModule,
@@ -72,12 +70,6 @@ export class HomePage implements AfterViewInit {
 
   usuario = 'Usuario';
   readonly nivelesEducacion = ['Basica', 'Media', 'Tecnica', 'Universitaria', 'Postgrado'];
-  readonly infoPages = [
-    { label: 'Problematica', route: '/problematica' },
-    { label: 'Solucion', route: '/solucion' },
-    { label: 'Componentes', route: '/componentes' },
-    { label: 'Funciones', route: '/funciones' }
-  ];
 
   readonly form = this.formBuilder.group({
     nombre: [this.appDataService.getHomeData().nombre, [Validators.required, Validators.minLength(2)]],
@@ -97,7 +89,7 @@ export class HomePage implements AfterViewInit {
     private readonly route: ActivatedRoute,
     private readonly router: Router
   ) {
-    addIcons({ eyeOutline, informationCircleOutline, logOutOutline, refreshOutline, schoolOutline });
+    addIcons({ eyeOutline, logOutOutline, refreshOutline, schoolOutline });
 
     this.usuario = this.router.getCurrentNavigation()?.extras.state?.['usuario']
       ?? history.state?.usuario
@@ -134,7 +126,7 @@ export class HomePage implements AfterViewInit {
     this.animarCampos();
   }
 
-  async mostrar(): Promise<void> {
+  async guardar(): Promise<void> {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       const alert = await this.alertController.create({

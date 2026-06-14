@@ -1,0 +1,35 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/home" aria-label="Volver">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      <span class="toolbar-kicker">Rutina diaria</span>
+      <strong>{{ completedTotal }}/{{ routine.length }} completados</strong>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <main class="content-space">
+    <ion-note>{{ todayLabel }}</ion-note>
+    <ion-list class="workout-list">
+      <ion-item *ngFor="let exercise of routine" [class.is-complete]="isCompleted(exercise.id)">
+        <span slot="start" class="exercise-icon" [ngClass]="exercise.category">
+          <ion-icon [name]="categoryIcon(exercise.category)"></ion-icon>
+        </span>
+
+        <ion-label>
+          <strong>{{ exercise.name }}</strong>
+          <span>{{ categoryLabels[exercise.category] }} · {{ exercise.minutes }} min</span>
+        </ion-label>
+
+        <ion-button slot="end" class="complete-button" [fill]="isCompleted(exercise.id) ? 'solid' : 'outline'" (click)="toggleCompleted(exercise.id)">
+          <ion-icon slot="icon-only" name="checkmark-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-list>
+  </main>
+</ion-content>

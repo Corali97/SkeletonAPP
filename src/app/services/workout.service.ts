@@ -14,8 +14,16 @@ export interface AgendaFitUser {
   goal: number;
 }
 
+export interface AgendaFitProfile {
+  firstName: string;
+  lastName: string;
+  educationLevel: string;
+  birthDate: string;
+}
+
 interface AgendaFitState {
   user: AgendaFitUser | null;
+  profile: AgendaFitProfile;
   exercises: Exercise[];
   completed: Record<string, string[]>;
 }
@@ -52,6 +60,10 @@ export class WorkoutService {
     return this.state.exercises;
   }
 
+  get profile(): AgendaFitProfile {
+    return this.state.profile;
+  }
+
   login(user: AgendaFitUser): void {
     this.state.user = user;
     this.saveState();
@@ -72,6 +84,11 @@ export class WorkoutService {
         minutes: 5,
       },
     ];
+    this.saveState();
+  }
+
+  saveProfile(profile: AgendaFitProfile): void {
+    this.state.profile = profile;
     this.saveState();
   }
 
@@ -121,6 +138,12 @@ export class WorkoutService {
   private loadState(): AgendaFitState {
     const fallback: AgendaFitState = {
       user: null,
+      profile: {
+        firstName: '',
+        lastName: '',
+        educationLevel: '',
+        birthDate: '',
+      },
       exercises: DEFAULT_EXERCISES,
       completed: {},
     };
@@ -135,6 +158,10 @@ export class WorkoutService {
       const parsed = JSON.parse(saved) as Partial<AgendaFitState>;
       return {
         user: parsed.user ?? fallback.user,
+        profile: {
+          ...fallback.profile,
+          ...(parsed.profile ?? {}),
+        },
         exercises: parsed.exercises ?? fallback.exercises,
         completed: parsed.completed ?? fallback.completed,
       };

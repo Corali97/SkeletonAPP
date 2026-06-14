@@ -1,0 +1,92 @@
+ion-toolbar {
+  --background: rgba(247, 251, 248, 0.96);
+  --border-color: transparent;
+}
+
+.toolbar-kicker {
+  display: block;
+  color: #116d62;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.content-space {
+  padding: 16px;
+}
+
+ion-note {
+  display: block;
+  margin-bottom: 12px;
+  color: #116d62;
+  font-weight: 800;
+}
+
+.workout-list {
+  display: grid;
+  gap: 10px;
+  background: transparent;
+}
+
+.workout-list ion-item {
+  --background: #ffffff;
+  --border-radius: 8px;
+  --padding-start: 14px;
+  --inner-padding-end: 10px;
+  border: 1px solid #dce5e0;
+  border-radius: 8px;
+}
+
+.workout-list ion-item.is-complete {
+  --background: #f2fbf6;
+  border-color: rgba(17, 109, 98, 0.26);
+}
+
+.exercise-icon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 23px;
+}
+
+ion-label strong,
+ion-label span {
+  display: block;
+}
+
+ion-label strong {
+  color: #17211f;
+  font-size: 0.98rem;
+}
+
+ion-label span {
+  color: #68706d;
+  font-size: 0.84rem;
+}
+
+.complete-button {
+  --border-radius: 999px;
+  --padding-start: 0;
+  --padding-end: 0;
+  width: 40px;
+  height: 40px;
+}
+
+.gluteos {
+  background: #f47b62;
+}
+
+.abdomen {
+  background: #116d62;
+}
+
+.piernas {
+  background: #5d8bdc;
+}
+
+.brazos {
+  background: #8f6ccf;
+}

@@ -1,0 +1,44 @@
+.not-found {
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+}
+
+ion-card {
+  width: min(100%, 420px);
+  border: 1px solid #dbe3ef;
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+ion-card-content {
+  display: grid;
+  gap: 12px;
+  justify-items: center;
+  text-align: center;
+}
+
+ion-icon {
+  width: 54px;
+  height: 54px;
+  color: #2563eb;
+}
+
+.error-code {
+  color: #2563eb;
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+h1 {
+  margin: 0;
+  color: #111827;
+  font-size: 1.45rem;
+}
+
+p {
+  margin: 0 0 4px;
+  color: #64748b;
+}

@@ -1,0 +1,63 @@
+.section-form {
+  padding: 12px;
+  border: 1px solid #dbe3ef;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+ion-list {
+  display: grid;
+  gap: 10px;
+  background: transparent;
+}
+
+ion-item {
+  --background: #f8fafc;
+  --border-radius: 8px;
+  --padding-start: 12px;
+  --inner-padding-end: 12px;
+  border: 1px solid #dbe3ef;
+  border-radius: 8px;
+}
+
+.date-field {
+  padding-top: 2px;
+}
+
+.upload-field {
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+  border: 1px solid #dbe3ef;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.upload-label {
+  color: #111827;
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.file-input {
+  display: none;
+}
+
+.file-name {
+  color: #64748b;
+  font-size: 0.9rem;
+  overflow-wrap: anywhere;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+::ng-deep .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}
+
+ion-button {
+  margin: 14px 0 0;
+  min-height: 46px;
+}

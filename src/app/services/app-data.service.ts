@@ -7,6 +7,22 @@ export interface HomeData {
   fechaNacimiento: string;
 }
 
+export interface WorkExperience {
+  empresa: string;
+  anioInicio: string;
+  trabajaActualmente: boolean;
+  anioTermino: string;
+  cargo: string;
+}
+
+export interface Certification {
+  nombreCertificado: string;
+  fechaObtencion: string;
+  vence: boolean;
+  fechaVencimiento: string;
+  documentoNombre: string;
+}
+
 export type ExerciseCategory = 'gluteos' | 'abdomen' | 'piernas' | 'brazos';
 
 export interface Exercise {
@@ -18,6 +34,8 @@ export interface Exercise {
 
 const USER_KEY = 'skeletonapp-user';
 const HOME_DATA_KEY = 'skeletonapp-home-data';
+const WORK_EXPERIENCE_KEY = 'skeletonapp-work-experience';
+const CERTIFICATION_KEY = 'skeletonapp-certification';
 const EXERCISES_KEY = 'skeletonapp-exercises';
 const COMPLETED_KEY = 'skeletonapp-completed';
 
@@ -73,6 +91,52 @@ export class AppDataService {
 
   saveHomeData(data: HomeData): void {
     localStorage.setItem(HOME_DATA_KEY, JSON.stringify(data));
+  }
+
+  getWorkExperience(): WorkExperience {
+    const fallback: WorkExperience = {
+      empresa: '',
+      anioInicio: '',
+      trabajaActualmente: false,
+      anioTermino: '',
+      cargo: ''
+    };
+
+    try {
+      return {
+        ...fallback,
+        ...(JSON.parse(localStorage.getItem(WORK_EXPERIENCE_KEY) ?? '{}') as Partial<WorkExperience>)
+      };
+    } catch {
+      return fallback;
+    }
+  }
+
+  saveWorkExperience(data: WorkExperience): void {
+    localStorage.setItem(WORK_EXPERIENCE_KEY, JSON.stringify(data));
+  }
+
+  getCertification(): Certification {
+    const fallback: Certification = {
+      nombreCertificado: '',
+      fechaObtencion: '',
+      vence: false,
+      fechaVencimiento: '',
+      documentoNombre: ''
+    };
+
+    try {
+      return {
+        ...fallback,
+        ...(JSON.parse(localStorage.getItem(CERTIFICATION_KEY) ?? '{}') as Partial<Certification>)
+      };
+    } catch {
+      return fallback;
+    }
+  }
+
+  saveCertification(data: Certification): void {
+    localStorage.setItem(CERTIFICATION_KEY, JSON.stringify(data));
   }
 
   getExercises(): Exercise[] {

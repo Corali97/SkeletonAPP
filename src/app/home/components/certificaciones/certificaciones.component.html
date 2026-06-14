@@ -1,0 +1,55 @@
+<form [formGroup]="form" class="section-form">
+  <ion-list lines="none">
+    <ion-item>
+      <ion-select label="Tipo de certificado" label-placement="stacked" placeholder="Selecciona certificado" formControlName="nombreCertificado">
+        <ion-select-option *ngFor="let certificado of certificados" [value]="certificado">
+          {{ certificado }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <div class="date-field">
+      <mat-form-field appearance="outline">
+        <mat-label>Fecha de obtencion</mat-label>
+        <input matInput [matDatepicker]="obtencionPicker" formControlName="fechaObtencion" readonly>
+        <mat-datepicker-toggle matIconSuffix [for]="obtencionPicker"></mat-datepicker-toggle>
+        <mat-datepicker #obtencionPicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <ion-item>
+      <ion-checkbox label-placement="end" formControlName="vence">El certificado vence</ion-checkbox>
+    </ion-item>
+
+    <div class="date-field" *ngIf="form.controls.vence.value">
+      <mat-form-field appearance="outline">
+        <mat-label>Fecha de vencimiento</mat-label>
+        <input matInput [matDatepicker]="vencimientoPicker" formControlName="fechaVencimiento" readonly>
+        <mat-datepicker-toggle matIconSuffix [for]="vencimientoPicker"></mat-datepicker-toggle>
+        <mat-datepicker #vencimientoPicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="upload-field">
+      <span class="upload-label">Documento</span>
+      <input
+        #documentoInput
+        class="file-input"
+        type="file"
+        accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+        (change)="onDocumentSelected($event)"
+      >
+      <ion-button expand="block" fill="outline" type="button" routerLink="/ruta-invalida">
+        Subir documento
+      </ion-button>
+      <span class="file-name">
+        {{ form.controls.documentoNombre.value || 'Sin documento seleccionado' }}
+      </span>
+    </div>
+  </ion-list>
+
+  <ion-button expand="block" type="button" (click)="guardar()">
+    <ion-icon slot="start" name="save-outline"></ion-icon>
+    Guardar certificacion
+  </ion-button>
+</form>

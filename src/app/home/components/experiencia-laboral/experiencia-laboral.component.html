@@ -1,0 +1,28 @@
+<form [formGroup]="form" class="section-form">
+  <ion-list lines="none">
+    <ion-item>
+      <ion-input label="Empresa" label-placement="stacked" placeholder="Nombre de la empresa" formControlName="empresa"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input label="Año inicio" label-placement="stacked" placeholder="2024" inputmode="numeric" formControlName="anioInicio"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-checkbox label-placement="end" formControlName="trabajaActualmente">Actualmente trabaja ahi</ion-checkbox>
+    </ion-item>
+
+    <ion-item *ngIf="!form.controls.trabajaActualmente.value">
+      <ion-input label="Año término" label-placement="stacked" placeholder="2026" inputmode="numeric" formControlName="anioTermino"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input label="Cargo" label-placement="stacked" placeholder="Cargo realizado" formControlName="cargo"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="block" type="button" (click)="guardar()">
+    <ion-icon slot="start" name="save-outline"></ion-icon>
+    Guardar experiencia
+  </ion-button>
+</form>

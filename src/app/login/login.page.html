@@ -43,12 +43,21 @@
             <ion-text color="danger" *ngIf="form.controls.password.touched && form.controls.password.invalid">
               <small>La password debe tener exactamente 4 numeros.</small>
             </ion-text>
+            <ion-text color="danger" *ngIf="form.controls.password.errors?.['invalidLogin']">
+              <small>Usuario o password no registrados. Puedes usar Registrar.</small>
+            </ion-text>
           </ion-list>
 
-          <ion-button expand="block" type="submit">
-            Ingresar
-            <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
-          </ion-button>
+          <div class="login-actions">
+            <ion-button expand="block" type="submit">
+              Ingresar
+              <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+            </ion-button>
+            <ion-button expand="block" fill="outline" type="button" (click)="registrar()">
+              Registrar
+              <ion-icon slot="end" name="person-add-outline"></ion-icon>
+            </ion-button>
+          </div>
         </form>
       </ion-card-content>
     </ion-card>

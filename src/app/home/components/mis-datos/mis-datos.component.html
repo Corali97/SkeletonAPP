@@ -1,0 +1,39 @@
+<form [formGroup]="form" class="data-form">
+  <ion-list lines="none">
+    <ion-item #nombreField>
+      <ion-input label="Nombre" label-placement="stacked" placeholder="Ingresa tu nombre" formControlName="nombre"></ion-input>
+    </ion-item>
+
+    <ion-item #apellidoField>
+      <ion-input label="Apellido" label-placement="stacked" placeholder="Ingresa tu apellido" formControlName="apellido"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-select label="Nivel de educacion" label-placement="stacked" formControlName="nivelEducacion">
+        <ion-select-option *ngFor="let nivel of nivelesEducacion" [value]="nivel">
+          {{ nivel }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <div class="date-field">
+      <mat-form-field appearance="outline">
+        <mat-label>Fecha nacimiento</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento" readonly>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </ion-list>
+
+  <div class="actions">
+    <ion-button fill="outline" type="button" (click)="limpiar()">
+      <ion-icon slot="start" name="refresh-outline"></ion-icon>
+      Limpiar
+    </ion-button>
+    <ion-button type="button" (click)="guardar()">
+      <ion-icon slot="start" name="save-outline"></ion-icon>
+      Guardar
+    </ion-button>
+  </div>
+</form>

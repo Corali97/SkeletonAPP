@@ -15,9 +15,10 @@ import {
 } from '@ionic/angular/standalone';
 import { AnimationController } from '@ionic/angular';
 import { addIcons } from 'ionicons';
-import { arrowForwardOutline, lockClosedOutline, personCircleOutline } from 'ionicons/icons';
+import { arrowForwardOutline, lockClosedOutline, personAddOutline, personCircleOutline } from 'ionicons/icons';
 
 import { AppDataService } from '../services/app-data.service';
+import { DBTaskService } from '../services/dbtask.service';
 
 @Component({
   selector: 'app-login',
@@ -57,10 +58,17 @@ export class LoginPage implements AfterViewInit {
   constructor(
     private readonly animationController: AnimationController,
     private readonly appDataService: AppDataService,
+    private readonly dbTaskService: DBTaskService,
     private readonly formBuilder: FormBuilder,
     private readonly router: Router
   ) {
-    addIcons({ arrowForwardOutline, lockClosedOutline, personCircleOutline });
+    addIcons({ arrowForwardOutline, lockClosedOutline, personAddOutline, personCircleOutline });
+    this.dbTaskService.createTables();
+
+    const activeSession = this.dbTaskService.getActiveSession();
+    if (activeSession) {
+      this.openHome(activeSession.user_name);
+    }
   }
 
   ngAfterViewInit(): void {
@@ -85,6 +93,29 @@ export class LoginPage implements AfterViewInit {
     }
 
     const usuario = this.form.controls.usuario.value.trim();
+    const password = this.form.controls.password.value;
+
+    if (!this.dbTaskService.login(usuario, password)) {
+      this.form.controls.password.setErrors({ invalidLogin: true });
+      return;
+    }
+
+    this.openHome(usuario);
+  }
+
+  registrar(): void {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+
+    const usuario = this.form.controls.usuario.value.trim();
+    const password = this.form.controls.password.value;
+    this.dbTaskService.registerSession(usuario, password);
+    this.openHome(usuario);
+  }
+
+  private openHome(usuario: string): void {
     this.appDataService.setUser(usuario);
 
     const extras: NavigationExtras = {

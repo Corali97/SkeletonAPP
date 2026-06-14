@@ -1,0 +1,120 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>
+      <span class="toolbar-kicker">Rutina de hoy</span>
+      <strong>Hola, {{ userName }}</strong>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button aria-label="Cerrar sesion" (click)="logout()">
+        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <main class="content-space">
+    <ion-card class="daily-card">
+      <ion-card-content>
+        <div>
+          <ion-note>{{ todayLabel }}</ion-note>
+          <h2>Plan express</h2>
+          <p>{{ completedTotal }}/{{ routine.length }} ejercicios completados</p>
+        </div>
+
+        <div class="progress-ring" aria-hidden="true">
+          <svg viewBox="0 0 120 120">
+            <circle class="ring-bg" cx="60" cy="60" r="48"></circle>
+            <circle class="ring-value" cx="60" cy="60" r="48" [style.stroke-dashoffset]="ringOffset"></circle>
+          </svg>
+          <strong>{{ progressPercent }}%</strong>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-segment [(ngModel)]="activePanel">
+      <ion-segment-button value="routine">
+        <ion-label>Hoy</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="exercises">
+        <ion-label>Ejercicios</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="progress">
+        <ion-label>Progreso</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <section *ngIf="activePanel === 'routine'">
+      <ion-list class="workout-list">
+        <ion-item *ngFor="let exercise of routine" [class.is-complete]="isCompleted(exercise.id)">
+              <span slot="start" class="exercise-icon" [ngClass]="exercise.category">
+            <ion-icon [name]="categoryIcon(exercise.category)"></ion-icon>
+          </span>
+
+          <ion-label>
+            <strong>{{ exercise.name }}</strong>
+            <span>{{ categoryLabels[exercise.category] }} · {{ exercise.minutes }} min</span>
+          </ion-label>
+
+          <ion-button slot="end" class="complete-button" [fill]="isCompleted(exercise.id) ? 'solid' : 'outline'" (click)="toggleCompleted(exercise.id)">
+            <ion-icon slot="icon-only" name="checkmark-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
+    </section>
+
+    <section *ngIf="activePanel === 'exercises'">
+      <form class="add-form" (ngSubmit)="addExercise()">
+        <ion-item>
+          <ion-input label="Nuevo ejercicio" label-placement="stacked" placeholder="Ej: Elevacion lateral" [(ngModel)]="newExerciseName" name="newExerciseName"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-select label="Categoria" label-placement="stacked" [(ngModel)]="newExerciseCategory" name="newExerciseCategory">
+            <ion-select-option *ngFor="let category of categories" [value]="category">
+              {{ categoryLabels[category] }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-button type="submit" aria-label="Agregar ejercicio">
+          <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+        </ion-button>
+      </form>
+
+      <article class="category-block" *ngFor="let category of categories">
+        <h3>
+          {{ categoryLabels[category] }}
+          <ion-chip>{{ exercisesByCategory(category).length }}</ion-chip>
+        </h3>
+        <ul>
+          <li *ngFor="let exercise of exercisesByCategory(category)">
+            <span>{{ exercise.name }}</span>
+            <span>{{ exercise.minutes }} min</span>
+          </li>
+        </ul>
+      </article>
+    </section>
+
+    <section *ngIf="activePanel === 'progress'">
+      <ion-card class="weekly-card">
+        <ion-card-content>
+          <div>
+            <p class="eyebrow">Semana actual</p>
+            <h2>{{ completedDays }} de {{ weeklyGoal }} sesiones</h2>
+          </div>
+          <ion-button fill="clear" color="danger" (click)="resetWeek()">Reiniciar</ion-button>
+        </ion-card-content>
+      </ion-card>
+
+      <div class="week-bars">
+        <div class="day-bar" *ngFor="let day of weekProgress">
+          <div class="bar-track">
+            <div class="bar-fill" [style.height.%]="day.height"></div>
+          </div>
+          <span>{{ day.label }}</span>
+        </div>
+      </div>
+    </section>
+  </main>
+</ion-content>

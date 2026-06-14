@@ -1,0 +1,7 @@
+{
+  "name": "AgendaFit",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

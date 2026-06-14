@@ -1,0 +1,295 @@
+ion-toolbar {
+  --background: rgba(247, 251, 248, 0.96);
+  --border-color: transparent;
+}
+
+.toolbar-kicker,
+.eyebrow {
+  display: block;
+  margin: 0;
+  color: #116d62;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.content-space {
+  padding: 14px 16px 22px;
+}
+
+ion-card {
+  margin: 0;
+  border: 1px solid #dce5e0;
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+.daily-card {
+  margin-bottom: 16px;
+  background: linear-gradient(145deg, #ffffff 0%, #eef8f3 100%);
+}
+
+.daily-card ion-card-content {
+  min-height: 150px;
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.daily-card ion-note {
+  display: inline-flex;
+  margin-bottom: 12px;
+  color: #116d62;
+  font-weight: 800;
+}
+
+.daily-card h2,
+.weekly-card h2 {
+  margin: 0 0 8px;
+  color: #17211f;
+  font-size: 1.18rem;
+  font-weight: 850;
+}
+
+.daily-card p {
+  margin: 0;
+  color: #68706d;
+}
+
+.progress-ring {
+  width: 106px;
+  height: 106px;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.progress-ring svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.ring-bg,
+.ring-value {
+  fill: none;
+  stroke-width: 12;
+}
+
+.ring-bg {
+  stroke: #d9ece5;
+}
+
+.ring-value {
+  stroke: #f47b62;
+  stroke-linecap: round;
+  stroke-dasharray: 302;
+  transition: stroke-dashoffset 0.25s ease;
+}
+
+.progress-ring strong {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #17211f;
+  font-size: 1.35rem;
+}
+
+ion-segment {
+  margin-bottom: 16px;
+  padding: 4px;
+  border-radius: 8px;
+  background: #e9efec;
+}
+
+ion-segment-button {
+  --border-radius: 6px;
+  --indicator-color: #ffffff;
+  text-transform: none;
+}
+
+.workout-list {
+  display: grid;
+  gap: 10px;
+  background: transparent;
+}
+
+.workout-list ion-item {
+  --background: #ffffff;
+  --border-radius: 8px;
+  --padding-start: 14px;
+  --inner-padding-end: 10px;
+  border: 1px solid #dce5e0;
+  border-radius: 8px;
+}
+
+.workout-list ion-item.is-complete {
+  --background: #f2fbf6;
+  border-color: rgba(17, 109, 98, 0.26);
+}
+
+.exercise-icon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 23px;
+}
+
+ion-label strong {
+  display: block;
+  color: #17211f;
+  font-size: 0.98rem;
+}
+
+ion-label span {
+  color: #68706d;
+  font-size: 0.84rem;
+}
+
+.complete-button {
+  --border-radius: 999px;
+  --padding-start: 0;
+  --padding-end: 0;
+  width: 40px;
+  height: 40px;
+}
+
+.add-form {
+  margin-bottom: 12px;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 1fr 112px 48px;
+  gap: 8px;
+  align-items: end;
+  border: 1px solid #dce5e0;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.add-form ion-item {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+}
+
+.add-form ion-button {
+  height: 48px;
+  margin: 0;
+}
+
+.category-block {
+  margin-bottom: 12px;
+  padding: 14px;
+  border: 1px solid #dce5e0;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.category-block h3 {
+  margin: 0 0 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #17211f;
+}
+
+.category-block ul {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+  list-style: none;
+}
+
+.category-block li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  color: #68706d;
+  font-size: 0.92rem;
+}
+
+.weekly-card {
+  margin-bottom: 14px;
+}
+
+.weekly-card ion-card-content {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.week-bars {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  align-items: end;
+  min-height: 165px;
+}
+
+.day-bar {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 8px;
+  min-width: 0;
+  text-align: center;
+}
+
+.bar-track {
+  min-height: 124px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #e9efec;
+}
+
+.bar-fill {
+  width: 100%;
+  min-height: 8px;
+  background: linear-gradient(180deg, #f4c95d, #f47b62);
+}
+
+.day-bar span {
+  color: #68706d;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.gluteos {
+  background: #f47b62;
+}
+
+.abdomen {
+  background: #116d62;
+}
+
+.piernas {
+  background: #5d8bdc;
+}
+
+.brazos {
+  background: #8f6ccf;
+}
+
+@media (max-width: 360px) {
+  .content-space {
+    padding-inline: 16px;
+  }
+
+  .add-form {
+    grid-template-columns: 1fr 48px;
+  }
+
+  .add-form ion-item:nth-child(2) {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+}

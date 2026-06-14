@@ -1,0 +1,59 @@
+.login-content {
+  --background:
+    linear-gradient(rgba(251, 253, 250, 0.82), rgba(251, 253, 250, 0.94)),
+    url("data:image/svg+xml,%3Csvg width='360' height='520' viewBox='0 0 360 520' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M83 423c72-44 113-104 123-180 5-36 23-58 55-66' stroke='%23116D62' stroke-width='28' stroke-linecap='round'/%3E%3Ccircle cx='271' cy='123' r='31' fill='%23F47B62'/%3E%3Cpath d='M78 244h92M207 244h82' stroke='%235D8BDC' stroke-width='22' stroke-linecap='round'/%3E%3Cpath d='M91 452h177' stroke='%23F4C95D' stroke-width='20' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+.login-wrap {
+  min-height: 100%;
+  padding: 28px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 14px;
+}
+
+.brand-mark {
+  width: 78px;
+  height: 78px;
+  display: grid;
+  place-items: center;
+  border-radius: 22px;
+  background: #17211f;
+  color: #79d4a3;
+  font-size: 44px;
+}
+
+.eyebrow {
+  margin: 0;
+  color: #116d62;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0 0 6px;
+  color: #17211f;
+  font-size: 3.2rem;
+  line-height: 0.95;
+}
+
+.intro {
+  max-width: 310px;
+  margin: 0;
+  color: #68706d;
+  line-height: 1.45;
+}
+
+ion-card {
+  margin: 0;
+  border: 1px solid #dce5e0;
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+ion-item {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+}

@@ -20,8 +20,11 @@ import { addIcons } from 'ionicons';
 import {
   barbellOutline,
   briefcaseOutline,
+  cameraOutline,
+  cloudOutline,
   documentTextOutline,
   logOutOutline,
+  mapOutline,
   personOutline,
   schoolOutline
 } from 'ionicons/icons';
@@ -75,8 +78,11 @@ export class HomePage implements AfterViewInit {
     addIcons({
       barbellOutline,
       briefcaseOutline,
+      cameraOutline,
+      cloudOutline,
       documentTextOutline,
       logOutOutline,
+      mapOutline,
       personOutline,
       schoolOutline
     });

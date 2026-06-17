@@ -1,0 +1,42 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Cámara</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <main class="content-space">
+    <ion-card>
+      <ion-card-content>
+        <div class="photo-box" *ngIf="photoPreview; else emptyPhoto">
+          <img [src]="photoPreview" alt="Foto capturada">
+        </div>
+        <ng-template #emptyPhoto>
+          <div class="photo-placeholder">
+            <ion-icon name="image-outline"></ion-icon>
+            <span>Sin foto cargada</span>
+          </div>
+        </ng-template>
+
+        <input
+          #cameraInput
+          class="camera-input"
+          type="file"
+          accept="image/*"
+          capture="environment"
+          (change)="onPhotoSelected($event)"
+        >
+
+        <ion-button expand="block" type="button" (click)="cameraInput.click()">
+          <ion-icon slot="start" name="camera-outline"></ion-icon>
+          Tomar foto
+        </ion-button>
+
+        <p class="file-name" *ngIf="fileName">{{ fileName }}</p>
+      </ion-card-content>
+    </ion-card>
+  </main>
+</ion-content>

@@ -1,0 +1,71 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>API Connection</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <main class="content-space">
+    <ion-card>
+      <ion-card-content>
+        <form [formGroup]="form">
+          <ion-list lines="none">
+            <ion-item>
+              <ion-input label="ID" label-placement="stacked" placeholder="Se completa al seleccionar" formControlName="id" readonly></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input label="Titulo" label-placement="stacked" placeholder="Titulo del post" formControlName="title"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-textarea label="Contenido" label-placement="stacked" placeholder="Cuerpo del post" formControlName="body"></ion-textarea>
+            </ion-item>
+            <ion-item>
+              <ion-input label="User ID" label-placement="stacked" inputmode="numeric" formControlName="userId"></ion-input>
+            </ion-item>
+          </ion-list>
+
+          <div class="actions">
+            <ion-button type="button" fill="outline" (click)="getPosts()">
+              <ion-icon slot="start" name="cloud-download-outline"></ion-icon>
+              Leer
+            </ion-button>
+            <ion-button type="button" (click)="createPost()">
+              <ion-icon slot="start" name="add-outline"></ion-icon>
+              Crear
+            </ion-button>
+            <ion-button type="button" fill="outline" (click)="updatePost()">
+              <ion-icon slot="start" name="create-outline"></ion-icon>
+              Modificar
+            </ion-button>
+          </div>
+        </form>
+      </ion-card-content>
+    </ion-card>
+
+    <div class="status" *ngIf="statusMessage || loading">
+      <ion-spinner *ngIf="loading" name="crescent"></ion-spinner>
+      <span>{{ statusMessage }}</span>
+    </div>
+
+    <section class="posts">
+      <ion-card *ngFor="let post of posts">
+        <ion-card-content>
+          <ion-label>
+            <span>Post {{ post.id }}</span>
+            <strong>{{ post.title }}</strong>
+            <p>{{ post.body }}</p>
+          </ion-label>
+          <div class="post-actions">
+            <ion-button size="small" fill="outline" type="button" (click)="selectPost(post)">Editar</ion-button>
+            <ion-button size="small" color="danger" fill="clear" type="button" (click)="deletePost(post)">
+              <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+            </ion-button>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </section>
+  </main>
+</ion-content>

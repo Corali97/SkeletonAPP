@@ -1,0 +1,50 @@
+.content-space {
+  padding: 16px;
+}
+
+ion-card {
+  margin: 0;
+  border: 1px solid #dbe3ef;
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+.photo-box,
+.photo-placeholder {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  margin-bottom: 14px;
+  overflow: hidden;
+  border: 1px solid #dbe3ef;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.photo-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-placeholder {
+  display: grid;
+  place-items: center;
+  gap: 10px;
+  color: #2563eb;
+}
+
+.photo-placeholder ion-icon {
+  width: 58px;
+  height: 58px;
+}
+
+.camera-input {
+  display: none;
+}
+
+.file-name {
+  margin: 12px 0 0;
+  color: #64748b;
+  overflow-wrap: anywhere;
+  text-align: center;
+}

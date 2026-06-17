@@ -28,6 +28,21 @@ export const routes: Routes = [
     loadComponent: () => import('./progress/progress.page').then((m) => m.ProgressPage)
   },
   {
+    path: 'api-connection',
+    canActivate: [authGuard],
+    loadComponent: () => import('./api-connection/api-connection.page').then((m) => m.ApiConnectionPage)
+  },
+  {
+    path: 'mapa',
+    canActivate: [authGuard],
+    loadComponent: () => import('./mapa/mapa.page').then((m) => m.MapaPage)
+  },
+  {
+    path: 'camara',
+    canActivate: [authGuard],
+    loadComponent: () => import('./camara/camara.page').then((m) => m.CamaraPage)
+  },
+  {
     path: '404',
     loadComponent: () => import('./not-found/not-found.page').then((m) => m.NotFoundPage)
   },

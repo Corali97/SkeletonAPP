@@ -23,13 +23,6 @@ export interface Certification {
   documentoNombre: string;
 }
 
-export interface ApiPost {
-  id?: number;
-  title: string;
-  body: string;
-  userId: number;
-}
-
 export type ExerciseCategory = 'gluteos' | 'abdomen' | 'piernas' | 'brazos';
 
 export interface Exercise {
@@ -43,7 +36,6 @@ const USER_KEY = 'skeletonapp-user';
 const HOME_DATA_KEY = 'skeletonapp-home-data';
 const WORK_EXPERIENCE_KEY = 'skeletonapp-work-experience';
 const CERTIFICATION_KEY = 'skeletonapp-certification';
-const API_POSTS_KEY = 'skeletonapp-api-posts';
 const EXERCISES_KEY = 'skeletonapp-exercises';
 const COMPLETED_KEY = 'skeletonapp-completed';
 
@@ -145,18 +137,6 @@ export class AppDataService {
 
   saveCertification(data: Certification): void {
     localStorage.setItem(CERTIFICATION_KEY, JSON.stringify(data));
-  }
-
-  getApiPosts(): ApiPost[] {
-    try {
-      return JSON.parse(localStorage.getItem(API_POSTS_KEY) ?? '[]') as ApiPost[];
-    } catch {
-      return [];
-    }
-  }
-
-  saveApiPosts(posts: ApiPost[]): void {
-    localStorage.setItem(API_POSTS_KEY, JSON.stringify(posts));
   }
 
   getExercises(): Exercise[] {

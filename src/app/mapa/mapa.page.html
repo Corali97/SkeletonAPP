@@ -11,19 +11,19 @@
   <main class="content-space">
     <ion-card>
       <ion-card-content>
-        <div class="map-box" *ngIf="mapUrl; else mapPlaceholder">
-          <iframe [src]="mapUrl" title="Mapa de ubicacion actual"></iframe>
-        </div>
-        <ng-template #mapPlaceholder>
-          <div class="map-placeholder">
-            <ion-icon name="locate-outline"></ion-icon>
-            <span>{{ statusMessage }}</span>
+        <div class="map-box">
+          <div class="map-grid"></div>
+          <div class="map-road road-one"></div>
+          <div class="map-road road-two"></div>
+          <div class="map-marker" [class.is-active]="hasLocation">
+            <ion-icon name="map-outline"></ion-icon>
           </div>
-        </ng-template>
+          <span class="map-status">{{ statusMessage }}</span>
+        </div>
 
         <section class="coordinates">
-          <p>Latitud: {{ latitude || 'Pendiente' }}</p>
-          <p>Longitud: {{ longitude || 'Pendiente' }}</p>
+          <p>Latitud: {{ hasLocation ? (latitude | number:'1.6-6') : 'Pendiente' }}</p>
+          <p>Longitud: {{ hasLocation ? (longitude | number:'1.6-6') : 'Pendiente' }}</p>
           <p>Precision: {{ accuracy ? (accuracy | number:'1.0-0') + ' m' : 'Pendiente' }}</p>
         </section>
 

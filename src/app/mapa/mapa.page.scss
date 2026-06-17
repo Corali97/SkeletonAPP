@@ -9,34 +9,79 @@ ion-card {
   box-shadow: none;
 }
 
-.map-box,
-.map-placeholder {
+.map-box {
+  position: relative;
   width: 100%;
   aspect-ratio: 1 / 1;
   overflow: hidden;
   border: 1px solid #dbe3ef;
   border-radius: 8px;
-  background: #e8f0ff;
+  background: #dceef2;
 }
 
-iframe {
-  width: 100%;
-  height: 100%;
-  border: 0;
+.map-grid {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(37, 99, 235, 0.12) 1px, transparent 1px),
+    linear-gradient(rgba(37, 99, 235, 0.12) 1px, transparent 1px);
+  background-size: 42px 42px;
 }
 
-.map-placeholder {
+.map-road {
+  position: absolute;
+  height: 24px;
+  width: 130%;
+  left: -15%;
+  border: 2px solid #cbd5e1;
+  background: #ffffff;
+}
+
+.road-one {
+  top: 34%;
+  transform: rotate(-18deg);
+}
+
+.road-two {
+  top: 60%;
+  transform: rotate(28deg);
+}
+
+.map-marker {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 62px;
+  height: 62px;
   display: grid;
   place-items: center;
-  gap: 10px;
-  padding: 18px;
-  color: #2563eb;
-  text-align: center;
+  border-radius: 50%;
+  background: #94a3b8;
+  color: #ffffff;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.22);
 }
 
-.map-placeholder ion-icon {
-  width: 54px;
-  height: 54px;
+.map-marker.is-active {
+  background: #2563eb;
+}
+
+.map-marker ion-icon {
+  width: 34px;
+  height: 34px;
+}
+
+.map-status {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  padding: 10px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #334155;
+  font-size: 0.9rem;
+  text-align: center;
 }
 
 .coordinates {

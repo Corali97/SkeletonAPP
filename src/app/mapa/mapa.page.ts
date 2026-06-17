@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import {
   IonBackButton,
   IonButton,
@@ -14,7 +13,7 @@ import {
   IonToolbar
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { locateOutline, stopCircleOutline } from 'ionicons/icons';
+import { locateOutline, mapOutline, stopCircleOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-mapa',
@@ -39,12 +38,15 @@ export class MapaPage implements OnInit, OnDestroy {
   latitude = 0;
   longitude = 0;
   accuracy = 0;
-  mapUrl?: SafeResourceUrl;
   statusMessage = 'Esperando permiso de ubicacion.';
   private watchId?: number;
 
-  constructor(private readonly sanitizer: DomSanitizer) {
-    addIcons({ locateOutline, stopCircleOutline });
+  constructor() {
+    addIcons({ locateOutline, mapOutline, stopCircleOutline });
+  }
+
+  get hasLocation(): boolean {
+    return this.latitude !== 0 || this.longitude !== 0;
   }
 
   ngOnInit(): void {
@@ -66,22 +68,21 @@ export class MapaPage implements OnInit, OnDestroy {
     }
 
     this.stopLocation();
-    this.statusMessage = 'Obteniendo ubicacion en tiempo real...';
+    this.statusMessage = 'Acepta el permiso de ubicacion para mostrar el marcador.';
     this.watchId = navigator.geolocation.watchPosition(
       (position) => {
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
         this.accuracy = position.coords.accuracy;
-        this.statusMessage = 'Ubicacion actualizada.';
-        this.updateMap();
+        this.statusMessage = 'Ubicacion actualizada en tiempo real.';
       },
       () => {
-        this.statusMessage = 'No se pudo obtener la ubicacion. Revisa permisos del navegador o telefono.';
+        this.statusMessage = 'No se pudo obtener la ubicacion. Activa GPS y acepta el permiso.';
       },
       {
         enableHighAccuracy: true,
         maximumAge: 0,
-        timeout: 10000
+        timeout: 15000
       }
     );
   }
@@ -90,12 +91,7 @@ export class MapaPage implements OnInit, OnDestroy {
     if (this.watchId !== undefined) {
       navigator.geolocation.clearWatch(this.watchId);
       this.watchId = undefined;
+      this.statusMessage = this.hasLocation ? 'Seguimiento detenido.' : this.statusMessage;
     }
-  }
-
-  private updateMap(): void {
-    const delta = 0.01;
-    const url = `https://www.openstreetmap.org/export/embed.html?bbox=${this.longitude - delta}%2C${this.latitude - delta}%2C${this.longitude + delta}%2C${this.latitude + delta}&layer=mapnik&marker=${this.latitude}%2C${this.longitude}`;
-    this.mapUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 }

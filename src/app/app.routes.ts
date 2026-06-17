@@ -28,11 +28,6 @@ export const routes: Routes = [
     loadComponent: () => import('./progress/progress.page').then((m) => m.ProgressPage)
   },
   {
-    path: 'api-connection',
-    canActivate: [authGuard],
-    loadComponent: () => import('./api-connection/api-connection.page').then((m) => m.ApiConnectionPage)
-  },
-  {
     path: 'mapa',
     canActivate: [authGuard],
     loadComponent: () => import('./mapa/mapa.page').then((m) => m.MapaPage)

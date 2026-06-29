@@ -12,12 +12,17 @@
     <ion-card>
       <ion-card-content>
         <div class="map-box">
-          <div class="map-grid"></div>
-          <div class="map-road road-one"></div>
-          <div class="map-road road-two"></div>
-          <div class="map-marker" [class.is-active]="hasLocation">
-            <ion-icon name="map-outline"></ion-icon>
+          <iframe *ngIf="mapUrl" [src]="mapUrl" title="Google Maps con ubicacion actual"></iframe>
+
+          <div class="map-placeholder" *ngIf="!mapUrl">
+            <div class="map-grid"></div>
+            <div class="map-road road-one"></div>
+            <div class="map-road road-two"></div>
+            <div class="map-marker" [class.is-active]="hasLocation">
+              <ion-icon name="map-outline"></ion-icon>
+            </div>
           </div>
+
           <span class="map-status">{{ statusMessage }}</span>
         </div>
 
@@ -37,6 +42,10 @@
             Detener
           </ion-button>
         </div>
+
+        <ion-button *ngIf="googleMapsLink" expand="block" fill="clear" type="button" [href]="googleMapsLink" target="_blank">
+          Abrir en Google Maps
+        </ion-button>
       </ion-card-content>
     </ion-card>
   </main>

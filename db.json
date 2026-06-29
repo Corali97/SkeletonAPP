@@ -1,0 +1,16 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "Primer post SkeletonAPP",
+      "body": "Registro local para probar json-server.",
+      "userId": 1
+    },
+    {
+      "id": 2,
+      "title": "API Connection",
+      "body": "Ejemplo de lectura, creacion, modificacion y eliminacion.",
+      "userId": 1
+    }
+  ]
+}

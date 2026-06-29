@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import {
   IonBackButton,
   IonButton,
@@ -38,10 +39,12 @@ export class MapaPage implements OnInit, OnDestroy {
   latitude = 0;
   longitude = 0;
   accuracy = 0;
+  googleMapsLink = '';
+  mapUrl?: SafeResourceUrl;
   statusMessage = 'Esperando permiso de ubicacion.';
   private watchId?: number;
 
-  constructor() {
+  constructor(private readonly sanitizer: DomSanitizer) {
     addIcons({ locateOutline, mapOutline, stopCircleOutline });
   }
 
@@ -75,6 +78,7 @@ export class MapaPage implements OnInit, OnDestroy {
         this.longitude = position.coords.longitude;
         this.accuracy = position.coords.accuracy;
         this.statusMessage = 'Ubicacion actualizada en tiempo real.';
+        this.updateGoogleMap();
       },
       () => {
         this.statusMessage = 'No se pudo obtener la ubicacion. Activa GPS y acepta el permiso.';
@@ -93,5 +97,12 @@ export class MapaPage implements OnInit, OnDestroy {
       this.watchId = undefined;
       this.statusMessage = this.hasLocation ? 'Seguimiento detenido.' : this.statusMessage;
     }
+  }
+
+  private updateGoogleMap(): void {
+    this.googleMapsLink = `https://www.google.com/maps?q=${this.latitude},${this.longitude}`;
+    this.mapUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+      `https://maps.google.com/maps?q=${this.latitude},${this.longitude}&z=16&output=embed`
+    );
   }
 }

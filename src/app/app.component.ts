@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 
+import { getDefaultPlatformConfig } from './config/app-platform.config';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -8,4 +10,6 @@ import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
   standalone: true,
   imports: [IonApp, IonRouterOutlet]
 })
-export class AppComponent {}
+export class AppComponent {
+  readonly platformConfig = getDefaultPlatformConfig();
+}

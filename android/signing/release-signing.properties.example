@@ -1,0 +1,4 @@
+storeFile=../signing/skeletonapp-release-key.jks
+storePassword=CAMBIAR_ESTA_CLAVE
+keyAlias=skeletonapp
+keyPassword=CAMBIAR_ESTA_CLAVE

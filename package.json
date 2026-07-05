@@ -8,6 +8,7 @@
     "start": "ionic serve",
     "build": "ng build",
     "test": "ng test",
+    "e2e": "protractor e2e/protractor.conf.js",
     "lint": "ng lint"
   },
   "private": true,
@@ -39,6 +40,17 @@
     "@angular/cli": "~16.2.16",
     "@angular/compiler-cli": "~16.2.12",
     "@capacitor/cli": "5.7.8",
+    "@types/jasmine": "~4.3.0",
+    "@types/node": "^16.18.0",
+    "jasmine-core": "~4.6.0",
+    "jasmine-spec-reporter": "~7.0.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "protractor": "^7.0.0",
+    "ts-node": "~10.9.2",
     "typescript": "~5.1.6"
   },
   "description": "Aplicacion Ionic Angular SkeletonAPP para la Experiencia 1 de PGY4221."

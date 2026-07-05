@@ -69,3 +69,8 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Android signing secrets
+/android/signing/*.jks
+/android/signing/*.keystore
+/android/signing/release-signing.properties

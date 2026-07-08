@@ -1,7 +1,7 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
+  appId: 'cl.pgy4221.skeletonapp',
   appName: 'SkeletonAPP',
   webDir: 'www'
 };

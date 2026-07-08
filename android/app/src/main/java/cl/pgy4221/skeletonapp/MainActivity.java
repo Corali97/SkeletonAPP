@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package cl.pgy4221.skeletonapp;
 
 import com.getcapacitor.BridgeActivity;
 

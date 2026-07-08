@@ -9,6 +9,8 @@
     "build": "ng build",
     "test": "ng test",
     "e2e": "protractor e2e/protractor.conf.js",
+    "cy:open": "cypress open --e2e",
+    "cy:run": "cypress run --e2e",
     "lint": "ng lint"
   },
   "private": true,
@@ -49,6 +51,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "cypress": "^13.17.0",
     "protractor": "^7.0.0",
     "ts-node": "~10.9.2",
     "typescript": "~5.1.6"
